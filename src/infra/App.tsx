@@ -1,16 +1,14 @@
-import { useTranslation } from 'react-i18next';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import './i18n';
-import './style.css';
+import "./i18n";
+import "./style.css";
 
-import Table from './views/Table';
+import Table from "./views/Table";
 
 export default function App() {
-  const { t } = useTranslation();
   return (
-    <div>
-      <h1 data-testid="main-title">{t('welcome')}</h1>
+    <QueryClientProvider client={new QueryClient()}>
       <Table />
-    </div>
+    </QueryClientProvider>
   );
 }

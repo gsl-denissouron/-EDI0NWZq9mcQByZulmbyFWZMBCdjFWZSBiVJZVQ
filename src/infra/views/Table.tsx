@@ -1,32 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useQuery } from "@tanstack/react-query";
 
-import { Joke } from '../../domain/entities/Joke';
-import { jokeService } from '../../domain/services/JokeService';
-import { jokeRepository } from '../repositories/JokeRepository';
+import { jokeService } from "../../domain/services/JokeService";
+import { jokeRepository } from "../repositories/JokeRepository";
 
 export default function Table() {
-  const [jokes, setJokes] = useState<Joke[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-
-  async function getJokes() {
-    setIsLoading(true);
-    await jokeService(jokeRepository)
-      .getJokes()
-      .then((responseJokes) => setJokes(responseJokes))
-      .catch(() => setIsError(true))
-      .finally(() => setIsLoading(false));
-  }
-
-  useEffect(() => {
-    getJokes();
-  }, []);
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["getJokes"],
+    queryFn: jokeService(jokeRepository).getJokes,
+  });
 
   if (isLoading) {
     return <div className="spinner"></div>;
   }
 
-  if (isError) {
+  if (error) {
     return <div>Error while fetching jokes</div>;
   }
 
@@ -41,7 +28,7 @@ export default function Table() {
         </tr>
       </thead>
       <tbody>
-        {jokes.map((joke) => (
+        {data?.map((joke) => (
           <tr key={joke.id}>
             <td>{joke.id}</td>
             <td>{joke.type}</td>
