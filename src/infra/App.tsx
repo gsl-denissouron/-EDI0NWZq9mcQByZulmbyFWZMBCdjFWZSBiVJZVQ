@@ -1,14 +1,14 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import "./i18n";
-import "./style.css";
+import "@infra/i18n";
+import "@infra/style.css";
 
-import Table from "./views/Table";
+import Jokes from "@infra/views/Jokes";
 
 export default function App() {
   return (
     <QueryClientProvider client={new QueryClient()}>
-      <Table />
+      <Jokes />
     </QueryClientProvider>
   );
 }

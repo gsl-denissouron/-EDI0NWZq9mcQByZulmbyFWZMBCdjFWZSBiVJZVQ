@@ -35,6 +35,21 @@ table tbody tr:last-of-type {
   border-bottom: 2px solid #009879;
 }
 
+button {
+  background-color: #009879;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+}
+
+button:disabled {
+  background-color: #dddddd;
+}
+
 .spinner {
   display: inline-block;
   width: 80px;

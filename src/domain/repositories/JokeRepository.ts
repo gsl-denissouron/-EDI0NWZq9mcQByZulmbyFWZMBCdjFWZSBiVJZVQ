@@ -1,4 +1,4 @@
-import { Joke } from '../entities/Joke';
+import { Joke } from "@domain/entities/Joke";
 
 export interface JokeRepository {
   getJokes: () => Promise<Joke[]>;
