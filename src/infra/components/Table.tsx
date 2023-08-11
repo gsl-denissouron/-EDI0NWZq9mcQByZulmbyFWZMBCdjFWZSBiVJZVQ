@@ -2,11 +2,15 @@ import { useState } from "react";
 
 import Paginator from "@infra/components/Paginator";
 
-interface TableProps<K extends string, T extends Record<K, number | string>> {
+interface TableProps<K, T> {
   rows: T[];
   rowId: K;
   columns: K[];
-  pagination?: { pageIndex: number; pageSize: number };
+  pagination?: {
+    pageIndex: number;
+    pageSize: number;
+    onPageIndexChange?: (newPageIndex: number) => void;
+  };
 }
 
 export default function Table<
@@ -47,8 +51,18 @@ export default function Table<
           pageIndex={pageIndex}
           pageSize={pagination.pageSize}
           totalElements={rows?.length}
-          onNext={() => setPageIndex((oldIndex) => oldIndex + 1)}
-          onPrevious={() => setPageIndex((oldIndex) => oldIndex - 1)}
+          onNext={() => {
+            setPageIndex(() => pageIndex + 1);
+            if (pagination.onPageIndexChange) {
+              pagination.onPageIndexChange(pageIndex + 1);
+            }
+          }}
+          onPrevious={() => {
+            setPageIndex(() => pageIndex - 1);
+            if (pagination.onPageIndexChange) {
+              pagination.onPageIndexChange(pageIndex - 1);
+            }
+          }}
         />
       )}
     </>

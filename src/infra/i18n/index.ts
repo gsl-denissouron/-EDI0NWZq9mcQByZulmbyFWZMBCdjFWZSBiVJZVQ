@@ -4,7 +4,27 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
-      welcome: "Hello World !",
+      components: {
+        paginator: {
+          currentPage: "Current Page",
+          previousPage: "Previous Page",
+          nextPage: "Next Page",
+        },
+      },
+      views: {
+        root: {
+          nav: {
+            home: "Home",
+            jokes: "Jokes",
+          },
+        },
+        home: {
+          title: "Hello World !",
+        },
+        jokes: {
+          errorMessage: "Error while fetching jokes",
+        },
+      },
     },
   },
   fr: {
@@ -12,7 +32,7 @@ const resources = {
       welcome: "Bonjour le monde !",
     },
   },
-};
+} as const;
 
 i18n.use(initReactI18next).init({
   resources,
@@ -21,5 +41,11 @@ i18n.use(initReactI18next).init({
     escapeValue: false, // react already safes from xss
   },
 });
+
+declare module "i18next" {
+  interface CustomTypeOptions {
+    resources: (typeof resources)["en"];
+  }
+}
 
 export default i18n;

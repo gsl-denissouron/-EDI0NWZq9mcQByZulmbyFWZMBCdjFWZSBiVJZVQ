@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 interface PaginatorProps {
   pageIndex: number;
   pageSize: number;
@@ -13,17 +15,20 @@ export default function Paginator({
   onNext,
   onPrevious,
 }: PaginatorProps) {
+  const { t } = useTranslation();
   const isFirst = pageIndex === 0;
   const isLast = totalElements / pageSize <= pageIndex + 1;
 
   return (
     <>
-      <span>Current Page: {pageIndex + 1}</span>
+      <span>
+        {t("components.paginator.currentPage")} : {pageIndex + 1}
+      </span>
       <button onClick={onPrevious} disabled={isFirst}>
-        Previous Page
+        {t("components.paginator.previousPage")}
       </button>{" "}
       <button onClick={onNext} disabled={isLast}>
-        Next Page
+        {t("components.paginator.nextPage")}
       </button>
     </>
   );

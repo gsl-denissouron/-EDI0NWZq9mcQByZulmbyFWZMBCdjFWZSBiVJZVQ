@@ -4,7 +4,7 @@ export default function Home() {
   const { t } = useTranslation();
   return (
     <div>
-      <h1 data-testid="main-title">{t("welcome")}</h1>
+      <h1 data-testid="main-title">{t("views.home.title")}</h1>
     </div>
   );
 }
