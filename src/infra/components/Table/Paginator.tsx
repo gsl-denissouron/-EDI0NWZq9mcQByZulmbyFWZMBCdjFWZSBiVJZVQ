@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslate } from "@infra/hooks/useTranslate";
 
 interface PaginatorProps {
   pageIndex: number;
@@ -15,7 +15,7 @@ export default function Paginator({
   onNext,
   onPrevious,
 }: PaginatorProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const isFirst = pageIndex === 0;
   const isLast = totalElements / pageSize <= pageIndex + 1;
 

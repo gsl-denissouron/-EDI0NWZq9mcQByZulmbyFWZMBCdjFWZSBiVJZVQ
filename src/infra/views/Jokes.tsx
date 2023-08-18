@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 import { jokePortfolio } from "@domain/services/JokePortfolio";
-import Table from "@infra/components/Table";
-import { jokeRepository } from "@infra/repositories/JokeRepository";
+import Table from "@infra/components/Table/Table";
+import { useTranslate } from "@infra/hooks/useTranslate";
+import { jokeRepository } from "@infra/repositories/JokeRepositoryLocal";
 
 export default function Jokes() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { isLoading, error, data } = useQuery({
     queryKey: ["getJokes"],

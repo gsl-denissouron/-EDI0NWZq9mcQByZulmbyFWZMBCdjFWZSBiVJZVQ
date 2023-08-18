@@ -1,7 +1,7 @@
-import { useTranslation } from "react-i18next";
+import { useTranslate } from "@infra/hooks/useTranslate";
 
 export default function Home() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   return (
     <div>
       <h1 data-testid="main-title">{t("views.home.title")}</h1>

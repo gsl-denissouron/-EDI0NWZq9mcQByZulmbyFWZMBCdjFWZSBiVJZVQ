@@ -1,6 +1,6 @@
 import { JokeRepository } from "@domain/repositories/JokeRepository";
 
-const JOKE_BACKEND = "https://official-joke-api.appspot.com/";
+const JOKE_BACKEND = "http://localhost:3005/";
 const NUMBER_OF_JOKES = 50;
 
 export const jokeRepository: JokeRepository = {

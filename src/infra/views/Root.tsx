@@ -1,8 +1,8 @@
+import { useTranslate } from "@infra/hooks/useTranslate";
 import { Link, Outlet } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 export default function Root() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   return (
     <>
       <nav>

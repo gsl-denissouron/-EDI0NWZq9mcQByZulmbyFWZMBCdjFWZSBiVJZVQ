@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Paginator from "@infra/components/Paginator";
+import Paginator from "@infra/components/Table/Paginator";
 
 interface TableProps<K, T> {
   rows: T[];
