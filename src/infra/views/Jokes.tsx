@@ -6,13 +6,13 @@ import { Joke } from "@domain/entities/Joke";
 import { Sort, SortConfig } from "@domain/entities/Sort";
 import { jokePortfolio } from "@domain/services/JokePortfolio";
 
-import Paginator from "@infra/components/Paginator";
-import TableBody from "@infra/components/Table/Body";
-import TableCell from "@infra/components/Table/Cell";
-import TableHead from "@infra/components/Table/Head";
-import TableRow from "@infra/components/Table/Row";
-import TableSortCell from "@infra/components/Table/SortCell";
-import Table from "@infra/components/Table/Table";
+import Paginator from "@infra/components/common/Paginator";
+import TableBody from "@infra/components/common/Table/Body";
+import TableCell from "@infra/components/common/Table/Cell";
+import TableHead from "@infra/components/common/Table/Head";
+import TableRow from "@infra/components/common/Table/Row";
+import TableSortCell from "@infra/components/common/Table/SortCell";
+import Table from "@infra/components/common/Table/Table";
 import ArrowDown from "@infra/components/ui/ArrowDown";
 import { useTranslate } from "@infra/hooks/useTranslate";
 import { jokeRepository } from "@infra/repositories/JokeRepositoryLocal";
@@ -27,14 +27,14 @@ function sortFn<T extends Record<K, number | string>, K extends string>(
   rows: T[],
   sort: Sort<K>
 ): T[] {
-  if (!sort.column) {
+  if (sort === "none") {
     return rows;
   }
 
   return [...rows].sort((a, b) =>
     sort.direction === "ASC"
-      ? compareFn(a[sort.column as K], b[sort.column as K])
-      : compareFn(b[sort.column as K], a[sort.column as K])
+      ? compareFn(a[sort.column], b[sort.column])
+      : compareFn(b[sort.column], a[sort.column])
   );
 }
 

@@ -1,5 +1,5 @@
 export type Direction = "ASC" | "DESC";
-export type Sort<K> = { column: K | undefined; direction: Direction };
+export type Sort<K> = "none" | { column: K; direction: Direction };
 export type ActiveSort = { active: boolean; direction: Direction };
 
 export class SortConfig<K> {
@@ -7,7 +7,13 @@ export class SortConfig<K> {
   private direction: "ASC" | "DESC" = "ASC";
 
   get sort(): Sort<K> {
-    return { column: this.column, direction: this.direction };
+    return this.column
+      ? { column: this.column, direction: this.direction }
+      : "none";
+  }
+
+  getFor(column: K): ActiveSort {
+    return { active: this.column === column, direction: this.direction };
   }
 
   sortBy(column: K): this {
@@ -31,9 +37,5 @@ export class SortConfig<K> {
     this.column = column;
     this.direction = "ASC";
     return this;
-  }
-
-  getFor(column: K): ActiveSort {
-    return { active: this.column === column, direction: this.direction };
   }
 }
