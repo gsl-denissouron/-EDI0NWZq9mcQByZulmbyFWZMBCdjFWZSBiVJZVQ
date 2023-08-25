@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-import Paginator from "@infra/components/Table/Paginator";
+import TableBody from "./Body";
+import TableCell from "./Cell";
+import TableHead from "./Head";
+import TableRow from "./Row";
+import TableSort from "./Sort";
+import ArrowDown from "../ui/ArrowDown";
 
 type Sort<K> = "none" | { column: K; direction: "ASC" | "DESC" };
 
@@ -55,8 +60,8 @@ export default function Table<
   K extends string,
   T extends Record<K, number | string>,
 >({ rows, rowId, columns, pagination }: TableProps<K, T>) {
-  const [pageIndex, setPageIndex] = useState(pagination?.pageIndex ?? 0);
   const [sort, setSort] = useState<Sort<K>>("none");
+  const pageIndex = pagination?.pageIndex ?? 0;
 
   const sortBy = (column: K) => {
     if (sort === "none") {
@@ -81,47 +86,38 @@ export default function Table<
   return (
     <>
       <table>
-        <thead>
-          <tr>
+        <TableHead>
+          <TableRow>
             {columns.map((column) => (
-              <th key={column} onClick={() => sortBy(column)}>
-                {column.toLocaleUpperCase()}
-                {sort !== "none" && sort.column === column && (
-                  <span> - {sort.direction.toLocaleLowerCase()}</span>
-                )}
-              </th>
+              <TableCell key={column}>
+                <TableSort
+                  sort={
+                    sort !== "none" && sort.column === column
+                      ? {
+                          active: true,
+                          direction: sort.direction,
+                        }
+                      : { active: false }
+                  }
+                  iconComponent={ArrowDown}
+                  onClick={() => sortBy(column)}
+                >
+                  {column.toLocaleUpperCase()}
+                </TableSort>
+              </TableCell>
             ))}
-          </tr>
-        </thead>
-        <tbody>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {currentRows.map((row) => (
-            <tr key={row[rowId]}>
+            <TableRow key={row[rowId]}>
               {columns.map((column) => (
-                <td key={column}>{row[column]}</td>
+                <TableCell key={column}>{row[column]}</TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
+        </TableBody>
       </table>
-      {pagination && (
-        <Paginator
-          pageIndex={pageIndex}
-          pageSize={pagination.pageSize}
-          totalElements={rows?.length}
-          onNext={() => {
-            setPageIndex(() => pageIndex + 1);
-            if (pagination.onPageIndexChange) {
-              pagination.onPageIndexChange(pageIndex + 1);
-            }
-          }}
-          onPrevious={() => {
-            setPageIndex(() => pageIndex - 1);
-            if (pagination.onPageIndexChange) {
-              pagination.onPageIndexChange(pageIndex - 1);
-            }
-          }}
-        />
-      )}
     </>
   );
 }
