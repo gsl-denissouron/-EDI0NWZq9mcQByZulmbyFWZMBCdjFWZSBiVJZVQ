@@ -1,22 +1,16 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
+import { ComponentPropsWithoutRef, ElementType } from "react";
+
 import { CellContext } from "./CellContext";
 
 interface TableHeadProps extends ComponentPropsWithoutRef<"thead"> {
   as?: ElementType;
-  children: ReactNode;
-  className?: string;
 }
 
-export default function TableHead({
-  as,
-  children,
-  className,
-  ...others
-}: TableHeadProps) {
+export default function TableHead({ as, children, ...others }: TableHeadProps) {
   const Component = as ?? "thead";
 
   return (
-    <Component className={className} {...others}>
+    <Component {...others}>
       <CellContext.Provider value="head">{children}</CellContext.Provider>
     </Component>
   );

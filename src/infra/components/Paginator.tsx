@@ -1,26 +1,32 @@
+import { ComponentPropsWithoutRef, ReactNode } from "react";
+
 import { useTranslate } from "@infra/hooks/useTranslate";
 
-interface PaginatorProps {
-  pageIndex: number;
-  pageSize: number;
+interface PaginatorProps extends ComponentPropsWithoutRef<"span"> {
+  as?: ReactNode;
+  pageIndex?: number;
+  pageSize?: number;
   totalElements: number;
   onNext: () => void;
   onPrevious: () => void;
 }
 
 export default function Paginator({
-  pageIndex,
-  pageSize,
+  as,
+  pageIndex = 0,
+  pageSize = 5,
   totalElements,
   onNext,
   onPrevious,
+  ...others
 }: PaginatorProps) {
+  const Component = as ?? "span";
   const { t } = useTranslate();
   const isFirst = pageIndex === 0;
   const isLast = totalElements / pageSize <= pageIndex + 1;
 
   return (
-    <>
+    <Component {...others}>
       <span>
         {t("components.paginator.currentPage")} : {pageIndex + 1}
       </span>
@@ -30,6 +36,6 @@ export default function Paginator({
       <button onClick={onNext} disabled={isLast}>
         {t("components.paginator.nextPage")}
       </button>
-    </>
+    </Component>
   );
 }

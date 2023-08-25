@@ -1,9 +1,9 @@
 import { ComponentPropsWithoutRef, ElementType } from "react";
-import { Direction } from "./Sort";
+
+import type { Direction } from "@domain/entities/Sort";
 
 interface TableSortIconProps extends ComponentPropsWithoutRef<"span"> {
   as?: ElementType;
-  className?: string;
   direction: Direction;
 }
 
