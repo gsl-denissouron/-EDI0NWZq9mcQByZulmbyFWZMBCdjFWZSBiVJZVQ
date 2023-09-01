@@ -15,7 +15,7 @@ import {
   TableRow,
   TableSortCell,
 } from "@infra/components/common/Table";
-import { ArrowDown } from "@infra/components/ui";
+import { ArrowDown, Spinner } from "@infra/components/ui";
 import { useTranslate } from "@infra/hooks/useTranslate";
 import { jokeRepository } from "@infra/repositories/JokeRepository";
 
@@ -64,7 +64,7 @@ export function Jokes() {
   const columns = ["id", "type", "setup", "punchline"] as const;
 
   if (isLoading) {
-    return <div className="spinner"></div>;
+    return <Spinner />;
   }
 
   if (error) {

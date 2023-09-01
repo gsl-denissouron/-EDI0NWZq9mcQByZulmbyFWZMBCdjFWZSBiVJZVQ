@@ -1,3 +1,4 @@
 import { ArrowDown } from "./ArrowDown";
+import { Spinner } from "./Spinner";
 
-export { ArrowDown };
+export { ArrowDown, Spinner };
