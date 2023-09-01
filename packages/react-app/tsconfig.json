@@ -9,6 +9,7 @@
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
 
     "paths": {
       "@domain/*": ["./node_modules/@app/domain/src/*"],

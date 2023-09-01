@@ -1,3 +1,9 @@
+body {
+  margin: 0;
+  color : rgb(82, 82, 90);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 h1,
 p {
   font-family: Lato;
