@@ -17,7 +17,7 @@ import {
 } from "@infra/components/common/Table";
 import { ArrowDown } from "@infra/components/ui";
 import { useTranslate } from "@infra/hooks/useTranslate";
-import { jokeRepository } from "@infra/repositories/JokeRepositoryLocal";
+import { jokeRepository } from "@infra/repositories/JokeRepository";
 
 function compareFn<T extends string | number>(a: T, b: T) {
   return typeof a === "string" && typeof b === "string"
@@ -27,7 +27,7 @@ function compareFn<T extends string | number>(a: T, b: T) {
 
 function sortFn<T extends Record<K, number | string>, K extends string>(
   rows: T[],
-  sort: Sort<K>
+  sort: Sort<T>
 ): T[] {
   if (sort === "none") {
     return rows;
@@ -52,7 +52,7 @@ export function Jokes() {
     queryFn: jokePortfolio(jokeRepository).getJokes,
   });
 
-  const [sortConfig, setSortConfig] = useState(new SortConfig<keyof Joke>());
+  const [sortConfig, setSortConfig] = useState(new SortConfig<Joke>());
 
   const pageIndex = parseInt(searchParams.get("page") ?? "1") - 1;
   const pageSize = 5;
