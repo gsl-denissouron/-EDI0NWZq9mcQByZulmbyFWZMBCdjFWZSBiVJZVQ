@@ -1,12 +1,12 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import "@infra/i18n";
-import "@infra/style.css";
+import "./i18n";
+import "./style.css";
 
-import { Home } from "@infra/views/Home";
-import { Jokes } from "@infra/views/Jokes";
-import { Root } from "@infra/views/Root";
+import { Home } from "./views/Home";
+import { Jokes } from "./views/Jokes";
+import { Root } from "./views/Root";
 
 const router = createBrowserRouter([
   {

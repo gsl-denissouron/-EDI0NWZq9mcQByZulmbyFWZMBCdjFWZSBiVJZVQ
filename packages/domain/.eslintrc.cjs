@@ -1,21 +1,14 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:i18next/recommended",
     "plugin:import/typescript",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  ignorePatterns: [".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh", "i18next", "import"],
+  plugins: ["import"],
   rules: {
-    "react-refresh/only-export-components": [
-      "warn",
-      { allowConstantExport: true },
-    ],
     "import/order": [
       "warn",
       {
@@ -25,11 +18,6 @@ module.exports = {
             pattern: "@domain/**",
             group: "external",
             position: "after",
-          },
-          {
-            pattern: "@infra/**",
-            group: "parent",
-            position: "before",
           },
         ],
         alphabetize: {

@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import App from "@infra/App";
+import App from "../App";
 
 describe("Main App", () => {
   it("Should render welcome message in main-title", () => {

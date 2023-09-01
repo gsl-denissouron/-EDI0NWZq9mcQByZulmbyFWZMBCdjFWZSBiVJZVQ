@@ -1,9 +1,9 @@
-import { ComponentPropsWithoutRef, ReactNode } from "react";
+import { ComponentPropsWithoutRef, ElementType } from "react";
 
-import { useTranslate } from "@infra/hooks/useTranslate";
+import { useTranslate } from "../../hooks/useTranslate";
 
 interface PaginatorProps extends ComponentPropsWithoutRef<"span"> {
-  as?: ReactNode;
+  as?: ElementType;
   pageIndex?: number;
   pageSize?: number;
   totalElements: number;

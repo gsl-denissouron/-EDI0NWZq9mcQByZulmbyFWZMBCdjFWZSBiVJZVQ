@@ -1,7 +1,5 @@
 import { JokeRepository } from "@domain/repositories/JokeRepository";
 
-console.log(import.meta.env);
-
 const JOKES_BACKEND = import.meta.env.VITE_JOKES_BACKEND;
 const NUMBER_OF_JOKES = 50;
 

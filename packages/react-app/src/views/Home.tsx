@@ -1,4 +1,4 @@
-import { useTranslate } from "@infra/hooks/useTranslate";
+import { useTranslate } from "../hooks/useTranslate";
 
 export function Home() {
   const { t } = useTranslate();

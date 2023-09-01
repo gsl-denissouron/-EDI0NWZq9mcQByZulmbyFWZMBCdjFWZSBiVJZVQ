@@ -6,7 +6,7 @@ import { Joke } from "@domain/entities/Joke";
 import { Sort, SortConfig } from "@domain/entities/Sort";
 import { jokePortfolio } from "@domain/services/JokePortfolio";
 
-import { Paginator } from "@infra/components/common/Paginator";
+import { Paginator } from "@react-app/components/common/Paginator";
 import {
   Table,
   TableBody,
@@ -14,10 +14,10 @@ import {
   TableHead,
   TableRow,
   TableSortCell,
-} from "@infra/components/common/Table";
-import { ArrowDown, Spinner } from "@infra/components/ui";
-import { useTranslate } from "@infra/hooks/useTranslate";
-import { jokeRepository } from "@infra/repositories/JokeRepository";
+} from "@react-app/components/common/Table";
+import { ArrowDown, Spinner } from "@react-app/components/ui";
+import { useTranslate } from "@react-app/hooks/useTranslate";
+import { jokeRepository } from "@react-app/repositories/JokeRepository";
 
 function compareFn<T extends string | number>(a: T, b: T) {
   return typeof a === "string" && typeof b === "string"
