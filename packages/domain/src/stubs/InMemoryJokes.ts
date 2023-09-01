@@ -65,7 +65,8 @@ let allJokes: Joke[] = [
   },
 ];
 
-export const getJokes: JokeRepository["getJokes"] = async () => allJokes;
+export const getJokes: JokeRepository["getJokes"] = async () =>
+  Promise.resolve(allJokes);
 
 export const setJokes = (jokes: Joke[]) => {
   allJokes = jokes;

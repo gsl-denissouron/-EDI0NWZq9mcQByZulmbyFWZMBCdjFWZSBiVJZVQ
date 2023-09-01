@@ -34,13 +34,18 @@ const resources = {
   },
 } as const;
 
-i18n.use(initReactI18next).init({
-  resources,
-  lng: "en",
-  interpolation: {
-    escapeValue: false, // react already safes from xss
-  },
-});
+i18n
+  .use(initReactI18next)
+  .init({
+    resources,
+    lng: "en",
+    interpolation: {
+      escapeValue: false, // react already safes from xss
+    },
+  })
+  .catch((err) => {
+    console.log("Error during i18n init", err);
+  });
 
 declare module "i18next" {
   interface CustomTypeOptions {

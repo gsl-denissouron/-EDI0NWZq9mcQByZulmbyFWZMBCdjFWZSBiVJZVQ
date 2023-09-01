@@ -25,7 +25,7 @@ function compareFn<T extends string | number>(a: T, b: T) {
     : (a as number) - (b as number);
 }
 
-function sortFn<T extends Record<K, number | string>, K extends string>(
+function sortFn<T extends Record<keyof T, number | string>>(
   rows: T[],
   sort: Sort<T>
 ): T[] {
@@ -82,7 +82,9 @@ export function Jokes() {
                   <TableSortCell
                     sort={sortConfig.getFor(column)}
                     iconComponent={ArrowDown}
-                    onClick={() => setSortConfig(sortConfig.sortBy(column))}
+                    onClick={() => {
+                      setSortConfig(sortConfig.sortBy(column));
+                    }}
                   >
                     {column.toLocaleUpperCase()}
                   </TableSortCell>
@@ -92,7 +94,7 @@ export function Jokes() {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row["id"]}>
+              <TableRow key={row.id}>
                 {columns.map((column) => (
                   <TableCell key={column}>{row[column]}</TableCell>
                 ))}
@@ -104,8 +106,12 @@ export function Jokes() {
           pageIndex={pageIndex}
           pageSize={pageSize}
           totalElements={jokes.length}
-          onNext={() => setSearchParams({ page: (pageIndex + 2).toString() })}
-          onPrevious={() => setSearchParams({ page: pageIndex.toString() })}
+          onNext={() => {
+            setSearchParams({ page: (pageIndex + 2).toString() });
+          }}
+          onPrevious={() => {
+            setSearchParams({ page: pageIndex.toString() });
+          }}
         />
       </>
     )

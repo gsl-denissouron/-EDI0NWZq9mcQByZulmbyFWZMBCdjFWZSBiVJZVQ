@@ -1,6 +1,9 @@
 export type Direction = "ASC" | "DESC";
 export type Sort<T> = "none" | { column: keyof T; direction: Direction };
-export type ActiveSort = { active: boolean; direction: Direction };
+export interface ActiveSort {
+  active: boolean;
+  direction: Direction;
+}
 
 export class SortConfig<T> {
   private column: keyof T | undefined = undefined;
