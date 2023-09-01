@@ -1,6 +1,6 @@
 import { useTranslate } from "@infra/hooks/useTranslate";
 
-export default function Home() {
+export function Home() {
   const { t } = useTranslate();
   return (
     <div>

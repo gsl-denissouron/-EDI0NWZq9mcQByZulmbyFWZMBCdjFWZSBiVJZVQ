@@ -1,7 +1,8 @@
-import { useTranslate } from "@infra/hooks/useTranslate";
 import { Link, Outlet } from "react-router-dom";
 
-export default function Root() {
+import { useTranslate } from "@infra/hooks/useTranslate";
+
+export function Root() {
   const { t } = useTranslate();
   return (
     <>

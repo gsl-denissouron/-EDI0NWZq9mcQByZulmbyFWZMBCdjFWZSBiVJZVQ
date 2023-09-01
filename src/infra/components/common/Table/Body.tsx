@@ -6,7 +6,7 @@ interface TableBodyProps extends ComponentPropsWithoutRef<"tbody"> {
   as?: ElementType;
 }
 
-export default function TableBody({ as, children, ...others }: TableBodyProps) {
+export function TableBody({ as, children, ...others }: TableBodyProps) {
   const Component = as ?? "tbody";
 
   return (

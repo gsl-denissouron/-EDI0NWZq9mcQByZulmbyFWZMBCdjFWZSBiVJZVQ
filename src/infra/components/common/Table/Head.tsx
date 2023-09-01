@@ -6,7 +6,7 @@ interface TableHeadProps extends ComponentPropsWithoutRef<"thead"> {
   as?: ElementType;
 }
 
-export default function TableHead({ as, children, ...others }: TableHeadProps) {
+export function TableHead({ as, children, ...others }: TableHeadProps) {
   const Component = as ?? "thead";
 
   return (

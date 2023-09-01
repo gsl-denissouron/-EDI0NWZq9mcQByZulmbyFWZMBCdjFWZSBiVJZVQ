@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from "react";
 
-export default function ArrowDown({
+export function ArrowDown({
   style,
   ...others
 }: ComponentPropsWithoutRef<"svg">) {

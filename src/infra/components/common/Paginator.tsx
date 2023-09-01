@@ -11,7 +11,7 @@ interface PaginatorProps extends ComponentPropsWithoutRef<"span"> {
   onPrevious: () => void;
 }
 
-export default function Paginator({
+export function Paginator({
   as,
   pageIndex = 0,
   pageSize = 5,

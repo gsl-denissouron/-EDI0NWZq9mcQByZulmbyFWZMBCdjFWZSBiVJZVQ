@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 
 import type { ActiveSort } from "@domain/entities/Sort";
 
-import TableSortIcon from "./SortIcon";
+import { TableSortIcon } from "./SortIcon";
 
 interface TableSortCellProps extends ComponentPropsWithoutRef<"span"> {
   as?: ElementType;
@@ -11,7 +11,7 @@ interface TableSortCellProps extends ComponentPropsWithoutRef<"span"> {
   sort: ActiveSort;
 }
 
-export default function TableSortCell({
+export function TableSortCell({
   as,
   children,
   iconComponent,

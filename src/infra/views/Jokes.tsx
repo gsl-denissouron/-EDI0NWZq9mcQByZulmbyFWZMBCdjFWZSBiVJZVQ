@@ -6,14 +6,16 @@ import { Joke } from "@domain/entities/Joke";
 import { Sort, SortConfig } from "@domain/entities/Sort";
 import { jokePortfolio } from "@domain/services/JokePortfolio";
 
-import Paginator from "@infra/components/common/Paginator";
-import TableBody from "@infra/components/common/Table/Body";
-import TableCell from "@infra/components/common/Table/Cell";
-import TableHead from "@infra/components/common/Table/Head";
-import TableRow from "@infra/components/common/Table/Row";
-import TableSortCell from "@infra/components/common/Table/SortCell";
-import Table from "@infra/components/common/Table/Table";
-import ArrowDown from "@infra/components/ui/ArrowDown";
+import { Paginator } from "@infra/components/common/Paginator";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableSortCell,
+} from "@infra/components/common/Table";
+import { ArrowDown } from "@infra/components/ui";
 import { useTranslate } from "@infra/hooks/useTranslate";
 import { jokeRepository } from "@infra/repositories/JokeRepositoryLocal";
 
@@ -38,7 +40,7 @@ function sortFn<T extends Record<K, number | string>, K extends string>(
   );
 }
 
-export default function Jokes() {
+export function Jokes() {
   const { t } = useTranslate();
   const [searchParams, setSearchParams] = useSearchParams();
   const {

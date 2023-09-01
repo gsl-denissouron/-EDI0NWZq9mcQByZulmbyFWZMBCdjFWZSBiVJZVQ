@@ -7,7 +7,7 @@ interface TableSortIconProps extends ComponentPropsWithoutRef<"span"> {
   direction: Direction;
 }
 
-export default function TableSortIcon({
+export function TableSortIcon({
   as,
   className,
   direction,

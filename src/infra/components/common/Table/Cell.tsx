@@ -6,7 +6,7 @@ interface TableCellProps extends ComponentPropsWithoutRef<"td"> {
   as?: ElementType;
 }
 
-export default function TableCell({ as, children, ...others }: TableCellProps) {
+export function TableCell({ as, children, ...others }: TableCellProps) {
   const cellContext = useContext(CellContext);
   const Component = as ?? (cellContext === "head" ? "th" : "td");
 

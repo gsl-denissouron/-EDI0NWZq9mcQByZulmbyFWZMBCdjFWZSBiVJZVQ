@@ -6,7 +6,7 @@ interface TableFootProps extends ComponentPropsWithoutRef<"tfoot"> {
   as?: ElementType;
 }
 
-export default function TableFoot({ as, children, ...others }: TableFootProps) {
+export function TableFoot({ as, children, ...others }: TableFootProps) {
   const Component = as ?? "tfoot";
 
   return (

@@ -4,7 +4,7 @@ interface TableProps extends ComponentPropsWithoutRef<"table"> {
   as?: ElementType;
 }
 
-export default function Table({ as, children, ...others }: TableProps) {
+export function Table({ as, children, ...others }: TableProps) {
   const Component = as ?? "table";
 
   return <Component {...others}>{children}</Component>;
