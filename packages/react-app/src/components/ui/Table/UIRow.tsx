@@ -29,6 +29,6 @@ export function UITableRow({ context, ...others }: UITableRowProps) {
           }
         `}
       `}
-    ></tr>
+    />
   );
 }

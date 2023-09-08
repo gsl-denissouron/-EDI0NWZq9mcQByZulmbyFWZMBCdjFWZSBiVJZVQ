@@ -6,13 +6,9 @@ interface TableRowProps extends ComponentPropsWithoutRef<"tr"> {
   as?: ElementType;
 }
 
-export function TableRow({ as, children, ...others }: TableRowProps) {
+export function TableRow({ as, ...others }: TableRowProps) {
   const rowContext = useContext(RowContext);
   const Component = as ?? "tr";
 
-  return (
-    <Component context={rowContext} {...others}>
-      {children}
-    </Component>
-  );
+  return <Component context={rowContext} {...others} />;
 }

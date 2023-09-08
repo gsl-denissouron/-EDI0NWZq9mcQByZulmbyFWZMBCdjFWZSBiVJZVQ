@@ -12,9 +12,9 @@ export function UITableCell({ context, ...others }: UITableCellProps) {
         {...others}
         css={css`
           padding: 12px 15px;
-          width: 25%;
+          width: 20%;
         `}
-      ></th>
+      />
     );
   }
   return (
@@ -22,8 +22,8 @@ export function UITableCell({ context, ...others }: UITableCellProps) {
       {...others}
       css={css`
         padding: 12px 15px;
-        width: 25%;
+        width: 20%;
       `}
-    ></td>
+    />
   );
 }

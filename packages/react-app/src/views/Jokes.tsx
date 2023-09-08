@@ -1,5 +1,6 @@
+import { css } from "@emotion/react";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { Joke } from "@domain/entities/Joke";
@@ -47,67 +48,46 @@ function sortFn<T extends Record<keyof T, number | string>>(
 export function Jokes() {
   const { t } = useTranslate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const {
-    isLoading,
-    error,
-    data: jokes,
-  } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ["getJokes"],
     queryFn: jokePortfolio(jokeRepository).getJokes,
   });
+  const [jokes, setJokes] = useState<Joke[] | undefined>(undefined);
+
+  useEffect(() => {
+    if (data) {
+      setJokes(data);
+    }
+  }, [data]);
 
   const [sortConfig, setSortConfig] = useState(new SortConfig<Joke>());
-
-  const pageIndex = parseInt(searchParams.get("page") ?? "1") - 1;
-  const pageSize = 5;
-
-  const rows = sortFn(jokes ?? [], sortConfig.sort).slice(
-    pageSize * pageIndex,
-    pageSize * (pageIndex + 1)
-  );
-  const columns = ["id", "type", "setup", "punchline"] as const;
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   if (error) {
     return <div>{t("views.jokes.errorMessage")}</div>;
   }
 
+  if (isLoading || jokes === undefined) {
+    return <Spinner />;
+  }
+
+  const pageIndex = parseInt(searchParams.get("page") ?? "1") - 1;
+  const pageSize = 5;
+
+  const rows = sortFn(jokes, sortConfig.sort).slice(
+    pageSize * pageIndex,
+    pageSize * (pageIndex + 1)
+  );
+  const columns = ["id", "type", "setup", "punchline"] as const;
+
   return (
-    jokes && (
-      <>
-        <Table as={UITable}>
-          <TableHead as={UITableHead}>
-            <TableRow as={UITableRow}>
-              {columns.map((column) => (
-                <TableCell key={column} as={UITableCell}>
-                  <TableSortCell
-                    sort={sortConfig.getFor(column)}
-                    iconComponent={ArrowDown}
-                    onClick={() => {
-                      setSortConfig(sortConfig.sortBy(column));
-                    }}
-                  >
-                    {column.toLocaleUpperCase()}
-                  </TableSortCell>
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody as={TableBody}>
-            {rows.map((row) => (
-              <TableRow key={row.id} as={UITableRow}>
-                {columns.map((column) => (
-                  <TableCell key={column} as={UITableCell}>
-                    {row[column]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+    <>
+      <div
+        css={css`
+          margin: 25px 0;
+          display: flex;
+          justify-content: space-between;
+        `}
+      >
         <Paginator
           pageIndex={pageIndex}
           pageSize={pageSize}
@@ -119,7 +99,63 @@ export function Jokes() {
             setSearchParams({ page: pageIndex.toString() });
           }}
         />
-      </>
-    )
+        <div>
+          <button
+            onClick={() => {
+              console.log("Open modal to create a joke");
+            }}
+          >
+            {"add item"}
+          </button>
+        </div>
+      </div>
+      <Table as={UITable}>
+        <TableHead as={UITableHead}>
+          <TableRow as={UITableRow}>
+            {columns.map((column) => (
+              <TableCell key={column} as={UITableCell}>
+                <TableSortCell
+                  sort={sortConfig.getFor(column)}
+                  iconComponent={ArrowDown}
+                  onClick={() => {
+                    setSortConfig(sortConfig.sortBy(column));
+                  }}
+                >
+                  {column.toLocaleUpperCase()}
+                </TableSortCell>
+              </TableCell>
+            ))}
+            <TableCell>{"ACTIONS"}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody as={TableBody}>
+          {rows.map((row) => (
+            <TableRow key={row.id} as={UITableRow}>
+              {columns.map((column) => (
+                <TableCell key={column} as={UITableCell}>
+                  {row[column]}
+                </TableCell>
+              ))}
+              <TableCell key={"actions"} as={UITableCell}>
+                <button
+                  onClick={() => {
+                    console.log("Open modal to edit a joke");
+                  }}
+                >
+                  {"edit item"}
+                </button>
+                <button
+                  onClick={() => {
+                    setJokes(() => jokes.filter((joke) => joke.id !== row.id));
+                  }}
+                >
+                  {"remove item"}
+                </button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </>
   );
 }

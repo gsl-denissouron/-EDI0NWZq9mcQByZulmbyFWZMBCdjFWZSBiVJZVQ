@@ -29,6 +29,6 @@ export function Spinner() {
           animation: ${spin} 1.2s linear infinite;
         }
       `}
-    ></div>
+    />
   );
 }
