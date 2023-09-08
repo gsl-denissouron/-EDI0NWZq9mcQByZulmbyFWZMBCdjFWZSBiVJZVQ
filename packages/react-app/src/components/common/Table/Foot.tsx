@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementType } from "react";
 
-import { CellContext } from "./CellContext";
+import { RowContext } from "./RowContext";
 
 interface TableFootProps extends ComponentPropsWithoutRef<"tfoot"> {
   as?: ElementType;
@@ -11,7 +11,7 @@ export function TableFoot({ as, children, ...others }: TableFootProps) {
 
   return (
     <Component {...others}>
-      <CellContext.Provider value="foot">{children}</CellContext.Provider>
+      <RowContext.Provider value="foot">{children}</RowContext.Provider>
     </Component>
   );
 }

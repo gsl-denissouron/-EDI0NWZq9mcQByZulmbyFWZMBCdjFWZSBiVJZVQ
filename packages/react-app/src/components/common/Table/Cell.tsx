@@ -1,17 +1,17 @@
 import { ComponentPropsWithoutRef, ElementType, useContext } from "react";
 
-import { CellContext } from "./CellContext";
+import { RowContext } from "./RowContext";
 
 interface TableCellProps extends ComponentPropsWithoutRef<"td"> {
   as?: ElementType;
 }
 
 export function TableCell({ as, children, ...others }: TableCellProps) {
-  const cellContext = useContext(CellContext);
-  const Component = as ?? (cellContext === "head" ? "th" : "td");
+  const rowContext = useContext(RowContext);
+  const Component = as ?? (rowContext === "head" ? "th" : "td");
 
   return (
-    <Component context={cellContext} {...others}>
+    <Component context={rowContext} {...others}>
       {children}
     </Component>
   );

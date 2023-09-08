@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementType } from "react";
 
-import { CellContext } from "./CellContext";
+import { RowContext } from "./RowContext";
 
 interface TableHeadProps extends ComponentPropsWithoutRef<"thead"> {
   as?: ElementType;
@@ -11,7 +11,7 @@ export function TableHead({ as, children, ...others }: TableHeadProps) {
 
   return (
     <Component {...others}>
-      <CellContext.Provider value="head">{children}</CellContext.Provider>
+      <RowContext.Provider value="head">{children}</RowContext.Provider>
     </Component>
   );
 }

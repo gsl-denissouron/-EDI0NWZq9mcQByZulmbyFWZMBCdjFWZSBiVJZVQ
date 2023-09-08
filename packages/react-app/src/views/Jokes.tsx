@@ -16,6 +16,10 @@ import {
   TableSortCell,
 } from "@react-app/components/common/Table";
 import { ArrowDown, Spinner } from "@react-app/components/ui";
+import { UITableCell } from "@react-app/components/ui/Table/UICell";
+import { UITableHead } from "@react-app/components/ui/Table/UIHead";
+import { UITableRow } from "@react-app/components/ui/Table/UIRow";
+import { UITable } from "@react-app/components/ui/Table/UITable";
 import { useTranslate } from "@react-app/hooks/useTranslate";
 import { jokeRepository } from "@react-app/repositories/JokeRepository";
 
@@ -74,11 +78,11 @@ export function Jokes() {
   return (
     jokes && (
       <>
-        <Table>
-          <TableHead>
-            <TableRow>
+        <Table as={UITable}>
+          <TableHead as={UITableHead}>
+            <TableRow as={UITableRow}>
               {columns.map((column) => (
-                <TableCell key={column}>
+                <TableCell key={column} as={UITableCell}>
                   <TableSortCell
                     sort={sortConfig.getFor(column)}
                     iconComponent={ArrowDown}
@@ -92,11 +96,13 @@ export function Jokes() {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody as={TableBody}>
             {rows.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.id} as={UITableRow}>
                 {columns.map((column) => (
-                  <TableCell key={column}>{row[column]}</TableCell>
+                  <TableCell key={column} as={UITableCell}>
+                    {row[column]}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}

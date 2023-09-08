@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementType } from "react";
 
-import { CellContext } from "./CellContext";
+import { RowContext } from "./RowContext";
 
 interface TableBodyProps extends ComponentPropsWithoutRef<"tbody"> {
   as?: ElementType;
@@ -11,7 +11,7 @@ export function TableBody({ as, children, ...others }: TableBodyProps) {
 
   return (
     <Component {...others}>
-      <CellContext.Provider value="body">{children}</CellContext.Provider>
+      <RowContext.Provider value="body">{children}</RowContext.Provider>
     </Component>
   );
 }
