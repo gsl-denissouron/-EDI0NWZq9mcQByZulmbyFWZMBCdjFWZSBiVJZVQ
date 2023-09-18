@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import { ComponentPropsWithoutRef } from "react";
 
 interface UITableRowProps extends ComponentPropsWithoutRef<"tr"> {
-  context: "body" | "head" | "foot";
+  context?: "body" | "head" | "foot";
 }
 
 export function UITableRow({ context, ...others }: UITableRowProps) {

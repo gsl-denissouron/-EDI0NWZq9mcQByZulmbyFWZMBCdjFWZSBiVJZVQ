@@ -9,7 +9,6 @@ interface TableSortIconProps extends ComponentPropsWithoutRef<"span"> {
 
 export function TableSortIcon({
   as,
-  className,
   direction,
   ...others
 }: TableSortIconProps) {
@@ -17,7 +16,6 @@ export function TableSortIcon({
 
   return (
     <Component
-      className={className}
       style={{
         transform: direction === "ASC" ? "rotate(180deg)" : "rotate(0deg)",
       }}

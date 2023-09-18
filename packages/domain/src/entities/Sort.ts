@@ -1,44 +1,59 @@
 export type Direction = "ASC" | "DESC";
-export type Sort<T> = "none" | { column: keyof T; direction: Direction };
+export interface Sort<T> {
+  column: keyof T | undefined;
+  direction: "ASC" | "DESC";
+}
 export interface ActiveSort {
   active: boolean;
   direction: Direction;
 }
 
-export class SortConfig<T> {
-  private column: keyof T | undefined = undefined;
-  private direction: "ASC" | "DESC" = "ASC";
-
-  get sort(): Sort<T> {
-    return this.column
-      ? { column: this.column, direction: this.direction }
-      : "none";
-  }
-
-  getFor(column: keyof T): ActiveSort {
-    return { active: this.column === column, direction: this.direction };
-  }
-
-  sortBy(column: keyof T): this {
-    if (!this.column) {
-      this.column = column;
-      this.direction = "ASC";
-      return this;
+export const sortBy =
+  <T>(column: keyof T) =>
+  (sort: Sort<T>): Sort<T> => {
+    if (!sort.column) {
+      return {
+        column,
+        direction: "ASC",
+      };
     }
 
-    if (this.column === column && this.direction === "ASC") {
-      this.direction = "DESC";
-      return this;
+    if (sort.column === column && sort.direction === "ASC") {
+      return {
+        column,
+        direction: "DESC",
+      };
     }
 
-    if (this.column === column && this.direction === "DESC") {
-      this.column = undefined;
-      this.direction = "ASC";
-      return this;
+    if (sort.column === column && sort.direction === "DESC") {
+      return {
+        column: undefined,
+        direction: "ASC",
+      };
     }
 
-    this.column = column;
-    this.direction = "ASC";
-    return this;
+    return {
+      column,
+      direction: "ASC",
+    };
+  };
+
+export const compareFn = <T extends string | number>(a: T, b: T) =>
+  typeof a === "string" && typeof b === "string"
+    ? a.localeCompare(b)
+    : (a as number) - (b as number);
+
+export const sortFn = <T extends Record<keyof T, number | string>>(
+  rows: T[],
+  { column, direction }: Sort<T>
+): T[] => {
+  if (!column) {
+    return rows;
   }
-}
+
+  return [...rows].sort((a, b) =>
+    direction === "ASC"
+      ? compareFn(a[column], b[column])
+      : compareFn(b[column], a[column])
+  );
+};

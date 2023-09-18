@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
+import { ComponentPropsWithoutRef, ElementType } from "react";
 
 import type { ActiveSort } from "@domain/entities/Sort";
 
@@ -6,7 +6,6 @@ import { TableSortIcon } from "./SortIcon";
 
 interface TableSortCellProps extends ComponentPropsWithoutRef<"span"> {
   as?: ElementType;
-  children: ReactNode;
   iconComponent?: ElementType;
   sort: ActiveSort;
 }
