@@ -1,52 +1,50 @@
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { Joke } from "@domain/entities/Joke";
-import { ActiveSort, Sort, sortBy, sortFn } from "@domain/entities/Sort";
+import { sortFn } from "@domain/entities/Sort";
 import { jokePortfolio } from "@domain/services/JokePortfolio";
 
 import { jokeRepository } from "@react-app/repositories/JokeRepository";
 
-export function useJokes({
-  pageIndex,
-  pageSize,
-}: {
-  pageIndex: number;
-  pageSize: number;
-}) {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["getJokes"],
-    queryFn: jokePortfolio(jokeRepository).getJokes,
-  });
+import { usePagination } from "./usePagination";
+import { useSort } from "./useSort";
 
-  const [sort, setSort] = useState<Sort<Joke>>({
-    column: undefined,
-    direction: "ASC",
+const GET_JOKES_QUERY_KEY = "getJokes";
+
+export function useJokes() {
+  const queryClient = useQueryClient();
+  const { pageIndex, pageSize, nextPage, previousPage } = usePagination({
+    pageSize: 5,
+  });
+  const { sort, getActiveSortFor, sortByColumn: sortJokesBy } = useSort<Joke>();
+  const { isLoading, error, data } = useQuery({
+    queryKey: [GET_JOKES_QUERY_KEY],
+    queryFn: jokePortfolio(jokeRepository).getJokes,
   });
 
   const jokes = data
     ? sortFn(data, sort).slice(pageSize * pageIndex, pageSize * (pageIndex + 1))
     : [];
 
-  const getActiveSortFor = (column: keyof Joke): ActiveSort => ({
-    active: sort.column === column,
-    direction: sort.direction,
-  });
+  const deleteJoke = async (jokeIndex: number) => {
+    console.log("send query for : " + jokeIndex);
 
-  const sortJokesBy = (column: keyof Joke) => {
-    setSort(sortBy(column));
+    // send query
+
+    await queryClient.invalidateQueries({ queryKey: [GET_JOKES_QUERY_KEY] });
   };
 
   return {
     isLoading,
     error,
     jokes,
+    pageIndex,
+    pageSize,
     totalElements: data?.length ?? 0,
+    nextPage,
+    previousPage,
     getActiveSortFor,
     sortJokesBy,
-    removeJoke: (jokeIndex: number) => {
-      console.log("send query");
-      // send query
-    },
+    deleteJoke,
   };
 }
