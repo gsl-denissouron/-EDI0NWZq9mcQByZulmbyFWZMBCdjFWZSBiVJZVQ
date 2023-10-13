@@ -4,3 +4,5 @@ export interface Joke {
   readonly punchline: string;
   readonly id: number;
 }
+
+export type NewJoke = Omit<Joke, "id">;

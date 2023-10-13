@@ -1,14 +1,15 @@
-import { Joke } from "@domain/entities/Joke";
+import { useForm } from "react-hook-form";
+
+import { NewJoke } from "@domain/entities/Joke";
 
 export function CreateJoke({
   onCancel,
   onCreate,
 }: {
   onCancel: () => void;
-  onCreate: (joke: Omit<Joke, "id">) => void;
+  onCreate: (joke: NewJoke) => void;
 }) {
-  // FIXME : create real joke here
-  const joke: Joke = undefined as unknown as Joke;
+  const { register, handleSubmit } = useForm<NewJoke>();
 
   return (
     <>
@@ -27,7 +28,24 @@ export function CreateJoke({
         </button>
       </div>
       <div>
-        <p>{"Insert create form here"}</p>
+        <form
+          css={{ display: "flex", flexDirection: "column" }}
+          onSubmit={handleSubmit(onCreate)}
+        >
+          <label>{"type"}</label>
+          <select defaultValue="general" {...register("type")}>
+            <option value="general">general</option>
+            <option value="programming">programming</option>
+            <option value="knock-knock">knock-knock</option>
+            <option value="dad">dad</option>
+          </select>
+          <label>{"setup"}</label>
+          <input {...register("setup", { required: true })} />
+          <label>{"punchline"}</label>
+          <input {...register("punchline", { required: true })} />
+
+          <input type="submit" />
+        </form>
       </div>
       <div css={{ display: "flex", justifyContent: "flex-end" }}>
         <button
@@ -41,13 +59,6 @@ export function CreateJoke({
           }}
         >
           {"Cancel"}
-        </button>
-        <button
-          onClick={() => {
-            onCreate(joke);
-          }}
-        >
-          {"Create a joke"}
         </button>
       </div>
     </>

@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { Joke } from "@domain/entities/Joke";
+import { NewJoke, Joke } from "@domain/entities/Joke";
 import { sortFn } from "@domain/entities/Sort";
 import { jokePortfolio } from "@domain/services/JokePortfolio";
 
@@ -26,7 +26,7 @@ export function useJokes() {
     ? sortFn(data, sort).slice(pageSize * pageIndex, pageSize * (pageIndex + 1))
     : [];
 
-  const createJoke = async (joke: Omit<Joke, "id">) => {
+  const createJoke = async (joke: NewJoke) => {
     console.log("send create query for joke : " + JSON.stringify(joke));
 
     // send query
