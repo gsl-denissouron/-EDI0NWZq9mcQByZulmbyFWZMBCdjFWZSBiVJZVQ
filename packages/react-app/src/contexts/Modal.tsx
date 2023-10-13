@@ -9,9 +9,16 @@ interface ModalHandler {
   openModal: (content: ReactNode) => void;
   closeModal: () => void;
 }
-export const ModalContext = createContext<ModalHandler>(
-  null as unknown as ModalHandler
-);
+export const ModalContext = createContext<ModalHandler>({
+  openModal: () => {
+    console.error(
+      "Cannot open modal, please add ModalContextProvider inside your App"
+    );
+  },
+  closeModal: () => {
+    console.error("noop");
+  },
+});
 
 export function ModalContextProvider({ children }: { children?: ReactNode }) {
   const [modal, setModal] = useState<ReactNode>("none");

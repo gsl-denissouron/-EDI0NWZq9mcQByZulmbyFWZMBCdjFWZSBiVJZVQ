@@ -21,7 +21,13 @@ import { EditJoke } from "./Modals/EditJoke";
 
 export function JokeTable() {
   const { openModal, closeModal } = useModal();
-  const { jokes: rows, deleteJoke, getActiveSortFor, sortJokesBy } = useJokes();
+  const {
+    jokes: rows,
+    editJoke,
+    deleteJoke,
+    getActiveSortFor,
+    sortJokesBy,
+  } = useJokes();
 
   const columns = [
     "id",
@@ -64,7 +70,23 @@ export function JokeTable() {
             <TableCell key={"actions"} as={UITableCell}>
               <button
                 onClick={() => {
-                  openModal(<EditJoke />);
+                  openModal(
+                    <EditJoke
+                      joke={row}
+                      onCancel={() => {
+                        closeModal();
+                      }}
+                      onEdit={(joke) => {
+                        editJoke(joke)
+                          .catch(() => {
+                            console.log("cannot edit joke");
+                          })
+                          .finally(() => {
+                            closeModal();
+                          });
+                      }}
+                    />
+                  );
                 }}
               >
                 {"edit item"}
@@ -73,6 +95,9 @@ export function JokeTable() {
                 onClick={() => {
                   openModal(
                     <DeleteJoke
+                      onCancel={() => {
+                        closeModal();
+                      }}
                       onDelete={() => {
                         deleteJoke(index)
                           .catch(() => {

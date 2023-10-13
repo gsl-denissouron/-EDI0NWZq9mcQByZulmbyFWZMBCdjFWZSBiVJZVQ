@@ -26,8 +26,24 @@ export function useJokes() {
     ? sortFn(data, sort).slice(pageSize * pageIndex, pageSize * (pageIndex + 1))
     : [];
 
+  const createJoke = async (joke: Omit<Joke, "id">) => {
+    console.log("send create query for joke : " + JSON.stringify(joke));
+
+    // send query
+
+    await queryClient.invalidateQueries({ queryKey: [GET_JOKES_QUERY_KEY] });
+  };
+
+  const editJoke = async (joke: Joke) => {
+    console.log("send edit query for joke : " + joke.id);
+
+    // send query
+
+    await queryClient.invalidateQueries({ queryKey: [GET_JOKES_QUERY_KEY] });
+  };
+
   const deleteJoke = async (jokeIndex: number) => {
-    console.log("send query for : " + jokeIndex);
+    console.log("send delete query for joke : " + jokeIndex);
 
     // send query
 
@@ -45,6 +61,8 @@ export function useJokes() {
     previousPage,
     getActiveSortFor,
     sortJokesBy,
+    createJoke,
+    editJoke,
     deleteJoke,
   };
 }

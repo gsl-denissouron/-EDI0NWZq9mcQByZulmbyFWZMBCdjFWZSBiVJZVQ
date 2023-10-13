@@ -5,9 +5,15 @@ import { useModal } from "@react-app/hooks/useModal";
 import { CreateJoke } from "./Modals/CreateJoke";
 
 export function Header() {
-  const { openModal } = useModal();
-  const { pageIndex, pageSize, totalElements, nextPage, previousPage } =
-    useJokes();
+  const { openModal, closeModal } = useModal();
+  const {
+    pageIndex,
+    pageSize,
+    totalElements,
+    nextPage,
+    previousPage,
+    createJoke,
+  } = useJokes();
 
   return (
     <div
@@ -31,7 +37,22 @@ export function Header() {
       <div>
         <button
           onClick={() => {
-            openModal(<CreateJoke />);
+            openModal(
+              <CreateJoke
+                onCancel={() => {
+                  closeModal();
+                }}
+                onCreate={(joke) => {
+                  createJoke(joke)
+                    .catch(() => {
+                      console.log("cannot create joke");
+                    })
+                    .finally(() => {
+                      closeModal();
+                    });
+                }}
+              />
+            );
           }}
         >
           {"add item"}

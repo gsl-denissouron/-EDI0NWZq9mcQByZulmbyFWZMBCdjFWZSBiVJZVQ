@@ -19,6 +19,7 @@ button {
   display: inline-block;
   font-size: 14px;
   margin: 4px;
+  cursor: pointer;
 }
 
 button:disabled {
