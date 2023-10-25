@@ -1,4 +1,4 @@
-import { Joke } from "@app/domain/entities/Joke.js";
+import { Joke } from "@domain/entities/Joke";
 
 import {
   Table,
@@ -13,7 +13,9 @@ import { UITableCell } from "@react-app/components/ui/Table/UICell";
 import { UITableHead } from "@react-app/components/ui/Table/UIHead";
 import { UITableRow } from "@react-app/components/ui/Table/UIRow";
 import { UITable } from "@react-app/components/ui/Table/UITable";
-import { useJokes } from "@react-app/hooks/useJokes";
+import { useDeleteJoke } from "@react-app/hooks/useJokes/deleteJoke";
+import { useEditJoke } from "@react-app/hooks/useJokes/editJoke";
+import { useGetJokes } from "@react-app/hooks/useJokes/getJokes";
 import { useModal } from "@react-app/hooks/useModal";
 
 import { DeleteJoke } from "./Modals/DeleteJoke";
@@ -21,13 +23,9 @@ import { EditJoke } from "./Modals/EditJoke";
 
 export function JokeTable() {
   const { openModal, closeModal } = useModal();
-  const {
-    jokes: rows,
-    editJoke,
-    deleteJoke,
-    getActiveSortFor,
-    sortJokesBy,
-  } = useJokes();
+  const { jokes: rows, getActiveSortFor, sortJokesBy } = useGetJokes();
+  const { deleteJoke } = useDeleteJoke();
+  const { editJoke } = useEditJoke();
 
   const columns = [
     "id",

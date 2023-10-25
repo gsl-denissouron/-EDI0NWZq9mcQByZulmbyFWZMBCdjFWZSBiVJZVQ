@@ -1,4 +1,4 @@
-import { useTranslate } from "../hooks/useTranslate";
+import { useTranslate } from "@react-app/hooks/useTranslate";
 
 export function Home() {
   const { t } = useTranslate();

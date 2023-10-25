@@ -1,13 +1,13 @@
 import { Spinner } from "@react-app/components/ui";
-import { useJokes } from "@react-app/hooks/useJokes";
+import { useGetJokes } from "@react-app/hooks/useJokes/getJokes";
 import { useTranslate } from "@react-app/hooks/useTranslate";
 
-import { Header } from "./Header";
+import { JokeHeader } from "./JokeHeader";
 import { JokeTable } from "./JokeTable";
 
 export function Jokes() {
   const { t } = useTranslate();
-  const { isLoading, error } = useJokes();
+  const { isLoading, error } = useGetJokes();
 
   if (error) {
     return <div>{t("views.jokes.errorMessage")}</div>;
@@ -19,7 +19,7 @@ export function Jokes() {
 
   return (
     <>
-      <Header />
+      <JokeHeader />
       <JokeTable />
     </>
   );

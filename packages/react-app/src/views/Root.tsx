@@ -2,8 +2,8 @@ import { css } from "@emotion/react";
 import { Outlet } from "react-router-dom";
 
 import { Header } from "@react-app/components/ui/Header";
+import { useTranslate } from "@react-app/hooks/useTranslate";
 
-import { useTranslate } from "../hooks/useTranslate";
 export function Root() {
   const { t } = useTranslate();
 

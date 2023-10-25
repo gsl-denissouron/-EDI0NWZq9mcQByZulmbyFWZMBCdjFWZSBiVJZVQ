@@ -1,5 +1,4 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ElementType, useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import "./i18n";
