@@ -44,5 +44,13 @@ module.exports = {
         pathGroupsExcludedImportTypes: ["builtin"],
       },
     ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        checksVoidReturn: {
+          attributes: false,
+        },
+      },
+    ],
   },
 };

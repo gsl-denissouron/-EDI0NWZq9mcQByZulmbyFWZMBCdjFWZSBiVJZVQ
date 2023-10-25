@@ -1,4 +1,6 @@
-import { Joke } from "@domain/entities/Joke";
+import { useForm } from "react-hook-form";
+
+import { JOKE_TYPES, Joke } from "@domain/entities/Joke";
 
 export function EditJoke({
   joke,
@@ -9,6 +11,8 @@ export function EditJoke({
   onCancel: () => void;
   onEdit: (joke: Joke) => void;
 }) {
+  const { register, handleSubmit } = useForm<Joke>();
+
   return (
     <>
       <div css={{ display: "flex", justifyContent: "flex-end" }}>
@@ -26,28 +30,51 @@ export function EditJoke({
         </button>
       </div>
       <div>
-        <p>{"Insert edit form here"}</p>
-      </div>
-      <div css={{ display: "flex", justifyContent: "flex-end" }}>
-        <button
-          css={{
-            backgroundColor: "white",
-            color: "#009879",
-            border: "1px solid #009879",
-          }}
-          onClick={() => {
-            onCancel();
-          }}
-        >
-          {"Cancel"}
-        </button>
-        <button
-          onClick={() => {
-            onEdit(joke);
-          }}
-        >
-          {"Edit a joke"}
-        </button>
+        <form onSubmit={handleSubmit(onEdit)}>
+          <div>
+            <label>{"type"}</label>
+            <br />
+            <select defaultValue={joke.type} {...register("type")}>
+              {JOKE_TYPES.map((jokeType) => (
+                <option key={jokeType} value={jokeType}>
+                  {jokeType}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>{"setup"}</label>
+            <br />
+            <input
+              defaultValue={joke.setup}
+              {...register("setup", { required: true })}
+            />
+          </div>
+          <div>
+            <label>{"punchline"}</label>
+            <br />
+            <input
+              defaultValue={joke.punchline}
+              {...register("punchline", { required: true })}
+            />
+          </div>
+
+          <div css={{ display: "flex", justifyContent: "flex-end" }}>
+            <button
+              css={{
+                backgroundColor: "white",
+                color: "#009879",
+                border: "1px solid #009879",
+              }}
+              onClick={() => {
+                onCancel();
+              }}
+            >
+              {"Cancel"}
+            </button>
+            <button type="submit">{"Edit a joke"}</button>
+          </div>
+        </form>
       </div>
     </>
   );
