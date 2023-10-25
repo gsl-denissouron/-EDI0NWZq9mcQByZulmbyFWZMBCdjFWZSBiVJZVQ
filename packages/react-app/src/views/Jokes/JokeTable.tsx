@@ -9,13 +9,13 @@ import {
   TableSortCell,
 } from "@react-app/components/common/Table";
 import { ArrowDown } from "@react-app/components/ui";
-import { UITableCell } from "@react-app/components/ui/Table/UICell";
-import { UITableHead } from "@react-app/components/ui/Table/UIHead";
-import { UITableRow } from "@react-app/components/ui/Table/UIRow";
-import { UITable } from "@react-app/components/ui/Table/UITable";
-import { useDeleteJoke } from "@react-app/hooks/useJokes/deleteJoke";
-import { useEditJoke } from "@react-app/hooks/useJokes/editJoke";
-import { useGetJokes } from "@react-app/hooks/useJokes/getJokes";
+import {
+  UITable,
+  UITableCell,
+  UITableHead,
+  UITableRow,
+} from "@react-app/components/ui/Table";
+import { jokeHooks } from "@react-app/hooks/jokes";
 import { useModal } from "@react-app/hooks/useModal";
 
 import { DeleteJoke } from "./Modals/DeleteJoke";
@@ -23,9 +23,13 @@ import { EditJoke } from "./Modals/EditJoke";
 
 export function JokeTable() {
   const { openModal, closeModal } = useModal();
-  const { jokes: rows, getActiveSortFor, sortJokesBy } = useGetJokes();
-  const { deleteJoke } = useDeleteJoke();
-  const { editJoke } = useEditJoke();
+  const {
+    jokes: rows,
+    getActiveSortFor,
+    sortJokesBy,
+  } = jokeHooks.useGetJokes();
+  const { deleteJoke } = jokeHooks.useDeleteJoke();
+  const { editJoke } = jokeHooks.useEditJoke();
 
   const columns = [
     "id",

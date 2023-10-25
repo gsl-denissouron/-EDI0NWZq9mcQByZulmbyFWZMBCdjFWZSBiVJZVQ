@@ -32,7 +32,7 @@ export function EditJoke({
       <div>
         <form onSubmit={handleSubmit(onEdit)}>
           <div>
-            <label>{"type"}</label>
+            <label>{"type :"}</label>
             <br />
             <select defaultValue={joke.type} {...register("type")}>
               {JOKE_TYPES.map((jokeType) => (
@@ -43,7 +43,7 @@ export function EditJoke({
             </select>
           </div>
           <div>
-            <label>{"setup"}</label>
+            <label>{"setup :"}</label>
             <br />
             <input
               defaultValue={joke.setup}
@@ -51,7 +51,7 @@ export function EditJoke({
             />
           </div>
           <div>
-            <label>{"punchline"}</label>
+            <label>{"punchline :"}</label>
             <br />
             <input
               defaultValue={joke.punchline}

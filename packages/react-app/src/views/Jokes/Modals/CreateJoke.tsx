@@ -32,7 +32,7 @@ export function CreateJoke({
           <div>
             <label>{"type :"}</label>
             <br />
-            <select defaultValue="general" {...register("type")}>
+            <select defaultValue={JOKE_TYPES[0]} {...register("type")}>
               {JOKE_TYPES.map((jokeType) => (
                 <option key={jokeType} value={jokeType}>
                   {jokeType}
@@ -41,12 +41,12 @@ export function CreateJoke({
             </select>
           </div>
           <div>
-            <label>{"setup"}</label>
+            <label>{"setup :"}</label>
             <br />
             <input {...register("setup", { required: true })} />
           </div>
           <div>
-            <label>{"punchline"}</label>
+            <label>{"punchline :"}</label>
             <br />
             <input {...register("punchline", { required: true })} />
           </div>

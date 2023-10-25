@@ -1,6 +1,5 @@
 import { Paginator } from "@react-app/components/common/Paginator";
-import { useCreateJoke } from "@react-app/hooks/useJokes/createJoke";
-import { useGetJokes } from "@react-app/hooks/useJokes/getJokes";
+import { jokeHooks } from "@react-app/hooks/jokes";
 import { useModal } from "@react-app/hooks/useModal";
 
 import { CreateJoke } from "./Modals/CreateJoke";
@@ -8,8 +7,8 @@ import { CreateJoke } from "./Modals/CreateJoke";
 export function JokeHeader() {
   const { openModal, closeModal } = useModal();
   const { pageIndex, pageSize, totalElements, nextPage, previousPage } =
-    useGetJokes();
-  const { createJoke } = useCreateJoke();
+    jokeHooks.useGetJokes();
+  const { createJoke } = jokeHooks.useCreateJoke();
 
   return (
     <div
