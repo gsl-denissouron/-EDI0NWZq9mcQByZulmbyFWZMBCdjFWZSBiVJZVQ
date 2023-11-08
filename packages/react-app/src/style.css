@@ -8,20 +8,3 @@ h1,
 p {
   font-family: Lato;
 }
-
-button {
-  background-color: #009879;
-  border: none;
-  color: white;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px;
-  cursor: pointer;
-}
-
-button:disabled {
-  background-color: #dddddd;
-}

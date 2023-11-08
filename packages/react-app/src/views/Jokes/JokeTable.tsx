@@ -9,6 +9,7 @@ import {
   TableSortCell,
 } from "@react-app/components/common/Table";
 import { ArrowDown } from "@react-app/components/ui";
+import { UIButton } from "@react-app/components/ui/Button";
 import {
   UITable,
   UITableCell,
@@ -70,7 +71,7 @@ export function JokeTable() {
               </TableCell>
             ))}
             <TableCell key={"actions"} as={UITableCell}>
-              <button
+              <UIButton
                 onClick={() => {
                   openModal(
                     <EditJoke
@@ -91,9 +92,9 @@ export function JokeTable() {
                   );
                 }}
               >
-                {"edit item"}
-              </button>
-              <button
+                {"Edit item"}
+              </UIButton>
+              <UIButton
                 onClick={() => {
                   openModal(
                     <DeleteJoke
@@ -113,8 +114,8 @@ export function JokeTable() {
                   );
                 }}
               >
-                {"remove item"}
-              </button>
+                {"Remove item"}
+              </UIButton>
             </TableCell>
           </TableRow>
         ))}

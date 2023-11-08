@@ -1,3 +1,5 @@
+import { UIButton } from "@react-app/components/ui/Button";
+
 export function DeleteJoke({
   onCancel,
   onDelete,
@@ -8,42 +10,34 @@ export function DeleteJoke({
   return (
     <>
       <div css={{ display: "flex", justifyContent: "flex-end" }}>
-        <button
-          css={{
-            backgroundColor: "white",
-            color: "#009879",
-            border: "1px solid #009879",
-          }}
+        <UIButton
+          variant="text"
           onClick={() => {
             onCancel();
           }}
         >
           {"X"}
-        </button>
+        </UIButton>
       </div>
       <div>
         <p>{"Are you sure you want to delete this joke ?"}</p>
       </div>
       <div css={{ display: "flex", justifyContent: "flex-end" }}>
-        <button
-          css={{
-            backgroundColor: "white",
-            color: "#009879",
-            border: "1px solid #009879",
-          }}
+        <UIButton
+          variant="outlined"
           onClick={() => {
             onCancel();
           }}
         >
           {"Cancel"}
-        </button>
-        <button
+        </UIButton>
+        <UIButton
           onClick={() => {
             onDelete();
           }}
         >
           {"Delete a joke"}
-        </button>
+        </UIButton>
       </div>
     </>
   );

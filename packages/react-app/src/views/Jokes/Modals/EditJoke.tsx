@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 
 import { JOKE_TYPES, Joke } from "@domain/entities/Joke";
 
+import { UIButton } from "@react-app/components/ui/Button";
+
 export function EditJoke({
   joke,
   onCancel,
@@ -16,18 +18,14 @@ export function EditJoke({
   return (
     <>
       <div css={{ display: "flex", justifyContent: "flex-end" }}>
-        <button
-          css={{
-            backgroundColor: "white",
-            color: "#009879",
-            border: "1px solid #009879",
-          }}
+        <UIButton
+          variant="text"
           onClick={() => {
             onCancel();
           }}
         >
           {"X"}
-        </button>
+        </UIButton>
       </div>
       <div>
         <form onSubmit={handleSubmit(onEdit)}>
@@ -60,19 +58,15 @@ export function EditJoke({
           </div>
 
           <div css={{ display: "flex", justifyContent: "flex-end" }}>
-            <button
-              css={{
-                backgroundColor: "white",
-                color: "#009879",
-                border: "1px solid #009879",
-              }}
+            <UIButton
+              variant="outlined"
               onClick={() => {
                 onCancel();
               }}
             >
               {"Cancel"}
-            </button>
-            <button type="submit">{"Edit a joke"}</button>
+            </UIButton>
+            <UIButton type="submit">{"Edit a joke"}</UIButton>
           </div>
         </form>
       </div>

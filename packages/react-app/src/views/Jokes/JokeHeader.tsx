@@ -1,4 +1,5 @@
 import { Paginator } from "@react-app/components/common/Paginator";
+import { UIButton } from "@react-app/components/ui/Button";
 import { jokeHooks } from "@react-app/hooks/jokes";
 import { useModal } from "@react-app/hooks/useModal";
 
@@ -22,6 +23,8 @@ export function JokeHeader() {
         pageIndex={pageIndex}
         pageSize={pageSize}
         totalElements={totalElements}
+        nextPageComponent={UIButton}
+        previousPageComponent={UIButton}
         onNext={() => {
           nextPage();
         }}
@@ -30,7 +33,7 @@ export function JokeHeader() {
         }}
       />
       <div>
-        <button
+        <UIButton
           onClick={() => {
             openModal(
               <CreateJoke
@@ -50,8 +53,8 @@ export function JokeHeader() {
             );
           }}
         >
-          {"add item"}
-        </button>
+          {"Add item"}
+        </UIButton>
       </div>
     </div>
   );
