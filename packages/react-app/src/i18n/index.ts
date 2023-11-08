@@ -27,6 +27,7 @@ const resources = {
             addItem: "Add item",
             editItem: "Edit item",
             removeItem: "Remove item",
+            filter: "Filter",
           },
           form: {
             type: "type",
@@ -69,6 +70,7 @@ const resources = {
             addItem: "Ajouter",
             editItem: "Editer",
             removeItem: "Supprimer",
+            filter: "Filtre",
           },
           form: {
             type: "type",

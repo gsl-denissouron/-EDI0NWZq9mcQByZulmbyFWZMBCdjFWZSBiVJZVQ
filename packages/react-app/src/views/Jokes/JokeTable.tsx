@@ -1,4 +1,5 @@
 import { Joke } from "@domain/entities/Joke";
+import { ActiveSort } from "@domain/entities/Sort";
 
 import {
   Table,
@@ -23,14 +24,19 @@ import { useTranslate } from "@react-app/hooks/useTranslate";
 import { DeleteJoke } from "./Modals/DeleteJoke";
 import { EditJoke } from "./Modals/EditJoke";
 
-export function JokeTable() {
+interface JokeTableProps {
+  jokes: Joke[];
+  getActiveSortFor: (column: keyof Joke) => ActiveSort;
+  sortJokesBy: (column: keyof Joke) => void;
+}
+
+export function JokeTable({
+  jokes,
+  getActiveSortFor,
+  sortJokesBy,
+}: JokeTableProps) {
   const { t } = useTranslate();
   const { openModal, closeModal } = useModal();
-  const {
-    jokes: rows,
-    getActiveSortFor,
-    sortJokesBy,
-  } = jokeHooks.useGetJokes();
   const { deleteJoke } = jokeHooks.useDeleteJoke();
   const { editJoke } = jokeHooks.useEditJoke();
 
@@ -65,7 +71,7 @@ export function JokeTable() {
         </TableRow>
       </TableHead>
       <TableBody as={TableBody}>
-        {rows.map((row, index) => (
+        {jokes.map((row, index) => (
           <TableRow key={row.id} as={UITableRow}>
             {columns.map((column) => (
               <TableCell key={column} as={UITableCell}>

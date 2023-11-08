@@ -7,7 +7,19 @@ import { JokeTable } from "./JokeTable";
 
 export function Jokes() {
   const { t } = useTranslate();
-  const { isLoading, error } = jokeHooks.useGetJokes();
+  const {
+    isLoading,
+    error,
+    jokes,
+    pageIndex,
+    pageSize,
+    totalElements,
+    nextPage,
+    previousPage,
+    getActiveSortFor,
+    sortJokesBy,
+    filterJokesBy,
+  } = jokeHooks.useGetJokes();
 
   if (error) {
     return <div>{t("views.jokes.errorMessage")}</div>;
@@ -19,8 +31,23 @@ export function Jokes() {
 
   return (
     <>
-      <JokeHeader />
-      <JokeTable />
+      <JokeHeader
+        {...{
+          pageIndex,
+          pageSize,
+          totalElements,
+          nextPage,
+          previousPage,
+          filterJokesBy,
+        }}
+      />
+      <JokeTable
+        {...{
+          jokes,
+          getActiveSortFor,
+          sortJokesBy,
+        }}
+      />
     </>
   );
 }

@@ -8,16 +8,20 @@ export function usePagination({ pageSize }: PaginationProps) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const pageIndex = parseInt(searchParams.get("page") ?? "1") - 1;
+  const setPageIndex = (pageIndex: number) => {
+    setSearchParams({ page: (pageIndex + 1).toString() });
+  };
 
   const nextPage = () => {
-    setSearchParams({ page: (pageIndex + 2).toString() });
+    setPageIndex(pageIndex + 1);
   };
   const previousPage = () => {
-    setSearchParams({ page: pageIndex.toString() });
+    setPageIndex(pageIndex - 1);
   };
 
   return {
     pageIndex,
+    setPageIndex,
     pageSize,
     nextPage,
     previousPage,

@@ -5,6 +5,7 @@ export function UITable({ ...others }: ComponentPropsWithoutRef<"table">) {
     <table
       {...others}
       css={{
+        width: "100%",
         borderCollapse: "collapse",
         margin: "25px 0",
         fontSize: "0.9em",

@@ -6,11 +6,25 @@ import { useTranslate } from "@react-app/hooks/useTranslate";
 
 import { CreateJoke } from "./Modals/CreateJoke";
 
-export function JokeHeader() {
+interface JokeHeaderProps {
+  pageIndex: number;
+  pageSize: number;
+  totalElements: number;
+  nextPage: () => void;
+  previousPage: () => void;
+  filterJokesBy: (value: string) => void;
+}
+
+export function JokeHeader({
+  pageIndex,
+  pageSize,
+  totalElements,
+  nextPage,
+  previousPage,
+  filterJokesBy,
+}: JokeHeaderProps) {
   const { t } = useTranslate();
   const { openModal, closeModal } = useModal();
-  const { pageIndex, pageSize, totalElements, nextPage, previousPage } =
-    jokeHooks.useGetJokes();
   const { createJoke } = jokeHooks.useCreateJoke();
 
   return (
@@ -35,6 +49,15 @@ export function JokeHeader() {
         }}
       />
       <div>
+        <span>
+          <label>{t("views.jokes.action.filter") + " :"}</label>
+          <input
+            type="text"
+            onChange={(e) => {
+              filterJokesBy(e.target.value);
+            }}
+          />
+        </span>
         <UIButton
           onClick={() => {
             openModal(
