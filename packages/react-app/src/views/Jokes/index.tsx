@@ -1,4 +1,4 @@
-import { Spinner } from "@react-app/components/ui";
+import { Spinner } from "@react-app/components/ui/Spinner";
 import { jokeHooks } from "@react-app/hooks/jokes";
 import { useTranslate } from "@react-app/hooks/useTranslate";
 

@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import { Outlet } from "react-router-dom";
 
 import { Header } from "@react-app/components/ui/Header";
@@ -16,10 +15,10 @@ export function Root() {
     <>
       <Header links={links} />
       <main
-        css={css`
-          max-width: 72rem;
-          margin: auto;
-        `}
+        css={{
+          maxWidth: "72rem",
+          margin: "auto",
+        }}
       >
         <Outlet></Outlet>
       </main>

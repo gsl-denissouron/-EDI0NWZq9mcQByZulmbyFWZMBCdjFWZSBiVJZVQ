@@ -8,7 +8,7 @@ import {
   TableRow,
   TableSortCell,
 } from "@react-app/components/common/Table";
-import { ArrowDown } from "@react-app/components/ui";
+import { ArrowDown } from "@react-app/components/ui/ArrowDown";
 import { UIButton } from "@react-app/components/ui/Button";
 import {
   UITable,
