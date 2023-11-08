@@ -18,11 +18,13 @@ import {
 } from "@react-app/components/ui/Table";
 import { jokeHooks } from "@react-app/hooks/jokes";
 import { useModal } from "@react-app/hooks/useModal";
+import { useTranslate } from "@react-app/hooks/useTranslate";
 
 import { DeleteJoke } from "./Modals/DeleteJoke";
 import { EditJoke } from "./Modals/EditJoke";
 
 export function JokeTable() {
+  const { t } = useTranslate();
   const { openModal, closeModal } = useModal();
   const {
     jokes: rows,
@@ -92,7 +94,7 @@ export function JokeTable() {
                   );
                 }}
               >
-                {"Edit item"}
+                {t("views.jokes.action.editItem")}
               </UIButton>
               <UIButton
                 onClick={() => {
@@ -114,7 +116,7 @@ export function JokeTable() {
                   );
                 }}
               >
-                {"Remove item"}
+                {t("views.jokes.action.removeItem")}
               </UIButton>
             </TableCell>
           </TableRow>

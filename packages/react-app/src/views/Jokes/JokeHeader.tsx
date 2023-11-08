@@ -2,10 +2,12 @@ import { Paginator } from "@react-app/components/common/Paginator";
 import { UIButton } from "@react-app/components/ui/Button";
 import { jokeHooks } from "@react-app/hooks/jokes";
 import { useModal } from "@react-app/hooks/useModal";
+import { useTranslate } from "@react-app/hooks/useTranslate";
 
 import { CreateJoke } from "./Modals/CreateJoke";
 
 export function JokeHeader() {
+  const { t } = useTranslate();
   const { openModal, closeModal } = useModal();
   const { pageIndex, pageSize, totalElements, nextPage, previousPage } =
     jokeHooks.useGetJokes();
@@ -53,7 +55,7 @@ export function JokeHeader() {
             );
           }}
         >
-          {"Add item"}
+          {t("views.jokes.action.addItem")}
         </UIButton>
       </div>
     </div>

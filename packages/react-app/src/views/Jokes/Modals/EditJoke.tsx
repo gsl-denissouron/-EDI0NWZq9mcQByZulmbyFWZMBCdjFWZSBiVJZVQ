@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { JOKE_TYPES, Joke } from "@domain/entities/Joke";
 
 import { UIButton } from "@react-app/components/ui/Button";
+import { useTranslate } from "@react-app/hooks/useTranslate";
 
 export function EditJoke({
   joke,
@@ -13,6 +14,7 @@ export function EditJoke({
   onCancel: () => void;
   onEdit: (joke: Joke) => void;
 }) {
+  const { t } = useTranslate();
   const { register, handleSubmit } = useForm<Joke>();
 
   return (
@@ -30,7 +32,7 @@ export function EditJoke({
       <div>
         <form onSubmit={handleSubmit(onEdit)}>
           <div>
-            <label>{"type :"}</label>
+            <label>{t("views.jokes.form.type") + " :"}</label>
             <br />
             <select defaultValue={joke.type} {...register("type")}>
               {JOKE_TYPES.map((jokeType) => (
@@ -41,7 +43,7 @@ export function EditJoke({
             </select>
           </div>
           <div>
-            <label>{"setup :"}</label>
+            <label>{t("views.jokes.form.setup") + " :"}</label>
             <br />
             <input
               defaultValue={joke.setup}
@@ -49,7 +51,7 @@ export function EditJoke({
             />
           </div>
           <div>
-            <label>{"punchline :"}</label>
+            <label>{t("views.jokes.form.punchline") + " :"}</label>
             <br />
             <input
               defaultValue={joke.punchline}
@@ -64,9 +66,9 @@ export function EditJoke({
                 onCancel();
               }}
             >
-              {"Cancel"}
+              {t("views.jokes.modals.cancel")}
             </UIButton>
-            <UIButton type="submit">{"Edit a joke"}</UIButton>
+            <UIButton type="submit">{t("views.jokes.modals.edit")}</UIButton>
           </div>
         </form>
       </div>

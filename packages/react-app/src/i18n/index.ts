@@ -23,13 +23,67 @@ const resources = {
         },
         jokes: {
           errorMessage: "Error while fetching jokes",
+          action: {
+            addItem: "Add item",
+            editItem: "Edit item",
+            removeItem: "Remove item",
+          },
+          form: {
+            type: "type",
+            setup: "setup",
+            punchline: "punchline",
+          },
+          modals: {
+            cancel: "Cancel",
+            create: "Create",
+            delete: "Delete",
+            deleteWarning: "Are you sure you want to delete this joke ?",
+            edit: "Edit",
+          },
         },
       },
     },
   },
   fr: {
     translation: {
-      welcome: "Bonjour le monde !",
+      components: {
+        paginator: {
+          currentPage: "Page Actuelle",
+          previousPage: "Page Précédente",
+          nextPage: "Page Suivante",
+        },
+      },
+      views: {
+        root: {
+          nav: {
+            home: "Accueil",
+            jokes: "Blagues",
+          },
+        },
+        home: {
+          title: "Hello World !",
+        },
+        jokes: {
+          errorMessage: "Erreur lors de la récupération des blagues",
+          action: {
+            addItem: "Ajouter",
+            editItem: "Editer",
+            removeItem: "Supprimer",
+          },
+          form: {
+            type: "type",
+            setup: "setup",
+            punchline: "punchline",
+          },
+          modals: {
+            cancel: "Annuler",
+            create: "Créer",
+            delete: "Supprimer",
+            deleteWarning: "Êtes-vous sûr de vouloir supprimer cette blague ?",
+            edit: "Editer",
+          },
+        },
+      },
     },
   },
 } as const;

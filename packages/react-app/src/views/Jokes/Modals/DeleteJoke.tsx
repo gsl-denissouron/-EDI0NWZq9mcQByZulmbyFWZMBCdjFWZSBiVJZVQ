@@ -1,4 +1,5 @@
 import { UIButton } from "@react-app/components/ui/Button";
+import { useTranslate } from "@react-app/hooks/useTranslate";
 
 export function DeleteJoke({
   onCancel,
@@ -7,6 +8,8 @@ export function DeleteJoke({
   onCancel: () => void;
   onDelete: () => void;
 }) {
+  const { t } = useTranslate();
+
   return (
     <>
       <div css={{ display: "flex", justifyContent: "flex-end" }}>
@@ -20,7 +23,7 @@ export function DeleteJoke({
         </UIButton>
       </div>
       <div>
-        <p>{"Are you sure you want to delete this joke ?"}</p>
+        <p>{t("views.jokes.modals.deleteWarning")}</p>
       </div>
       <div css={{ display: "flex", justifyContent: "flex-end" }}>
         <UIButton
@@ -29,14 +32,14 @@ export function DeleteJoke({
             onCancel();
           }}
         >
-          {"Cancel"}
+          {t("views.jokes.modals.cancel")}
         </UIButton>
         <UIButton
           onClick={() => {
             onDelete();
           }}
         >
-          {"Delete a joke"}
+          {t("views.jokes.modals.delete")}
         </UIButton>
       </div>
     </>
