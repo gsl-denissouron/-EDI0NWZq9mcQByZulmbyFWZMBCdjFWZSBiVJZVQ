@@ -19,7 +19,7 @@ export function Jokes() {
     getActiveSortFor,
     sortJokesBy,
     filterJokesBy,
-  } = jokeHooks.useGetJokes();
+  } = jokeHooks.useJokes();
 
   if (error) {
     return <div>{t("views.jokes.errorMessage")}</div>;
