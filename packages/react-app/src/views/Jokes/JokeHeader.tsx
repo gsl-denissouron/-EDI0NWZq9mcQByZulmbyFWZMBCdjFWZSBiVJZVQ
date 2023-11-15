@@ -1,6 +1,6 @@
 import { Paginator } from "@react-app/components/common/Paginator";
 import { UIButton } from "@react-app/components/ui/Button";
-import { jokeHooks } from "@react-app/hooks/jokes";
+import { jokeHooks } from "@react-app/data/jokes";
 import { useModal } from "@react-app/hooks/useModal";
 import { useTranslate } from "@react-app/hooks/useTranslate";
 

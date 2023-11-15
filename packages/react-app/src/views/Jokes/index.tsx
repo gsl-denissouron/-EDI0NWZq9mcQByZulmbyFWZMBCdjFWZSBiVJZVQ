@@ -1,7 +1,7 @@
 import { Spinner } from "@react-app/components/ui/Spinner";
-import { jokeHooks } from "@react-app/hooks/jokes";
 import { useTranslate } from "@react-app/hooks/useTranslate";
 
+import { useJokeTable } from "./hooks/useJokeTable";
 import { JokeHeader } from "./JokeHeader";
 import { JokeTable } from "./JokeTable";
 
@@ -19,7 +19,7 @@ export function Jokes() {
     getActiveSortFor,
     sortJokesBy,
     filterJokesBy,
-  } = jokeHooks.useJokes();
+  } = useJokeTable();
 
   if (error) {
     return <div>{t("views.jokes.errorMessage")}</div>;

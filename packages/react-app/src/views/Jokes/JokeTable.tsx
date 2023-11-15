@@ -17,7 +17,7 @@ import {
   UITableHead,
   UITableRow,
 } from "@react-app/components/ui/Table";
-import { jokeHooks } from "@react-app/hooks/jokes";
+import { jokeHooks } from "@react-app/data/jokes";
 import { useModal } from "@react-app/hooks/useModal";
 import { useTranslate } from "@react-app/hooks/useTranslate";
 

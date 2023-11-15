@@ -1,13 +1,12 @@
 import { Joke } from "@domain/entities/Joke";
 import { sortFn } from "@domain/entities/Sort";
 
-import { useFilterOnFields } from "../useFilterOnFields";
-import { usePagination } from "../usePagination";
-import { useSort } from "../useSort";
+import { useGetJokes } from "@react-app/data/jokes/getJokes";
+import { useFilterOnFields } from "@react-app/hooks/useFilterOnFields";
+import { usePagination } from "@react-app/hooks/usePagination";
+import { useSort } from "@react-app/hooks/useSort";
 
-import { useGetJokes } from "./getJokes";
-
-export function useJokes() {
+export function useJokeTable() {
   const { pageIndex, setPageIndex, pageSize, nextPage, previousPage } =
     usePagination({
       pageSize: 5,
